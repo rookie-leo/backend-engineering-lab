@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: backend-engineering-lab
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+provider:
+  payment:
+    base-url: ${PAYMENT_PROVIDER_BASE_URL:http://localhost:8081}
+    connect-timeout: 1s
+    read-timeout: 2s
