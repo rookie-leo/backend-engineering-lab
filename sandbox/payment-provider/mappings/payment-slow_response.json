@@ -20,6 +20,7 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName":  "payment-success-response.json"
+    "bodyFileName":  "payment-slow-response-response.json",
+    "fixedDelayMilliseconds": 10000
   }
 }
