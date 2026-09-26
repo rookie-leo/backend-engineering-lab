@@ -10,19 +10,12 @@ public record PaymentDomain(
         String accountId,
         BigDecimal amount,
         String currency,
-        PaymentStatus status,
-        LocalDateTime createdAt
+        PaymentStatus status
 ) {
-    public PaymentResponse toResponse() {
-        return new PaymentResponse(
-                status.toString(),
-                createdAt
-        );
-    }
 
     public PaymentDomain withStatus(PaymentStatus newStatus) {
         return new PaymentDomain(
-                accountId, amount, currency, newStatus, createdAt
+                accountId, amount, currency, newStatus
         );
     }
 }

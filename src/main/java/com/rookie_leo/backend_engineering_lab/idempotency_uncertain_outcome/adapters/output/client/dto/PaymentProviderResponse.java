@@ -8,5 +8,4 @@ public record PaymentProviderResponse(
         String status,
         @JsonFormat(pattern = "dd-MM-yyyy")
         LocalDate createdAt
-) {
-}
+) {}

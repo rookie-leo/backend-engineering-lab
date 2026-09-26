@@ -2,6 +2,8 @@ package com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.ada
 
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.adapters.input.web.dto.PaymentRequest;
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.adapters.input.web.dto.PaymentResponse;
+import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.PaymentDomain;
+import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.enums.PaymentStatus;
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.port.input.PaymentUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,20 @@ public class PaymentController {
             @PathVariable("accountId") String accountId,
             @RequestBody @Valid PaymentRequest request
     ) {
-        return ResponseEntity.ok(paymentUseCase.processPayment(request.toDomain(accountId)).toResponse());
+        var domain = new PaymentDomain(
+                accountId,
+                request.amount(),
+                request.currency(),
+                PaymentStatus.RECEIVED
+        );
+
+        domain = paymentUseCase.processPayment(domain);
+
+        var response = new PaymentResponse(
+                domain.status().toString()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
 }

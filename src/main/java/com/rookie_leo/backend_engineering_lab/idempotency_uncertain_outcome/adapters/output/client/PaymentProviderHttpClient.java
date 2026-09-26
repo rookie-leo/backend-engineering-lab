@@ -2,6 +2,9 @@ package com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.ada
 
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.adapters.output.client.dto.PaymentProviderRequest;
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.adapters.output.client.dto.PaymentProviderResponse;
+import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.PaymentDomain;
+import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.enums.PaymentStatus;
+import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.port.output.PaymentProviderPort;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
@@ -13,7 +16,7 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 
 @Component
-public class PaymentProviderHttpClient implements PaymentProvider {
+public class PaymentProviderHttpClient implements PaymentProviderPort {
 
     private final RestClient restClient;
 
@@ -38,7 +41,13 @@ public class PaymentProviderHttpClient implements PaymentProvider {
     }
 
     @Override
-    public PaymentProviderResponse processPayment(PaymentProviderRequest providerRequest) {
+    public PaymentStatus processPayment(PaymentDomain domain) {
+        var providerRequest = new PaymentProviderRequest(
+                domain.accountId(),
+                domain.amount(),
+                domain.currency()
+        );
+
         var body = new ProviderBody(
                 providerRequest.amount(),
                 providerRequest.currency()
@@ -55,9 +64,8 @@ public class PaymentProviderHttpClient implements PaymentProvider {
         if (response == null)
             throw new IllegalStateException("Payment Provider retornou uma resposta sem corpo");
 
-        return response;
+        return PaymentStatus.valueOf(response.status());
     }
 
-    public record ProviderBody(BigDecimal amount, String currency) {
-    }
+    public record ProviderBody(BigDecimal amount, String currency) {}
 }

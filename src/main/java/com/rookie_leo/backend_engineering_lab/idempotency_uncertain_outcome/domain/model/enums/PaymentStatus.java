@@ -3,5 +3,5 @@ package com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.dom
 public enum PaymentStatus {
     SUCCESS,
     DECLINED,
-    PROCESSING
+    RECEIVED
 }
