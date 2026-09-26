@@ -19,6 +19,9 @@
     ]
   },
   "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
     "status": 200,
     "bodyFileName":  "payment-declined-response.json"
   }

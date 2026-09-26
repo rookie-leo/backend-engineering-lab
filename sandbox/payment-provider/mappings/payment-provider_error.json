@@ -19,6 +19,9 @@
     ]
   },
   "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
     "status": 500,
     "bodyFileName":  "payment-provider-error-response.json"
   }
