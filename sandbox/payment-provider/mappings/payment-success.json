@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/payment-provider/ACC-0001",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "amount": 1500.00,
+          "currency": "BRL"
+        },
+        "ignoreArrayOrder": true,
+        "ignoreExtraElements": true
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName":  "payment-success-response.json"
+  }
+}

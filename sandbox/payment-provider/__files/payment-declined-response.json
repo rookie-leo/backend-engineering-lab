@@ -1,0 +1,6 @@
+{
+  "transaction_id": "987654321",
+  "status": "DECLINED",
+  "reason_code": "51",
+  "message": "Recusada pela instituição financeira."
+}
