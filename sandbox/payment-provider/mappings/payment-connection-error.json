@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/api/payment-provider/ACC-0005",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "amount": 1500.00,
+          "currency": "BRL"
+        },
+        "ignoreArrayOrder": true,
+        "ignoreExtraElements": true
+      }
+    ]
+  },
+  "response": {
+    "fault": "CONNECTION_RESET_BY_PEER"
+  }
+}
