@@ -7,8 +7,6 @@ import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.adap
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.PaymentDomain;
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.domain.model.enums.PaymentStatus;
 import com.rookie_leo.backend_engineering_lab.idempotency_uncertain_outcome.port.output.PaymentProviderPort;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
@@ -25,7 +23,6 @@ import java.time.Duration;
 @Component
 public class PaymentProviderHttpClient implements PaymentProviderPort {
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentProviderHttpClient.class);
     private final RestClient restClient;
 
     public PaymentProviderHttpClient(
