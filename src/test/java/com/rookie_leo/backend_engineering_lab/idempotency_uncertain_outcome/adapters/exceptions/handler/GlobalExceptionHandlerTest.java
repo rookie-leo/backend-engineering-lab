@@ -46,7 +46,7 @@ class GlobalExceptionHandlerTest {
 
         assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
         assertEquals(new ApiErrorResponse(502,
-                "Não foi possível processar o pagamento devido a uma falha na comunicação com o provedor.",
+                "Não foi possível processar o pagamento devido a uma falha no provedor de pagamentos.",
                 Optional.empty()), response.getBody());
     }
 
@@ -84,7 +84,7 @@ class GlobalExceptionHandlerTest {
                         504, "Não foi possível confirmar o resultado do pagamento."),
                 org.junit.jupiter.params.provider.Arguments.of(
                         new PaymentProviderException("internal connection details", new ConnectException("refused")),
-                        502, "Não foi possível processar o pagamento devido a uma falha na comunicação com o provedor.")
+                        502, "Não foi possível processar o pagamento devido a uma falha no provedor de pagamentos.")
         );
     }
 }

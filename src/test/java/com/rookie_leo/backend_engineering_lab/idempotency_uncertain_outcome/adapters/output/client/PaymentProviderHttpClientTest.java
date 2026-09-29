@@ -87,7 +87,7 @@ class PaymentProviderHttpClientTest {
             return response(HttpStatus.INTERNAL_SERVER_ERROR, "{\"message\":\"provider failed\"}");
         });
 
-        var error = assertThrows(PaymentProviderException.class, () -> client.processPayment(payment));
+        var error = assertThrowsExactly(PaymentProviderException.class, () -> client.processPayment(payment));
 
         var cause = assertInstanceOf(HttpServerErrorException.class, error.getCause());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, cause.getStatusCode());
@@ -114,7 +114,7 @@ class PaymentProviderHttpClientTest {
         var calls = new AtomicInteger();
         var client = failingClient(cause, calls);
 
-        var error = assertThrows(PaymentProviderException.class, () -> client.processPayment(payment));
+        var error = assertThrowsExactly(PaymentProviderException.class, () -> client.processPayment(payment));
 
         assertInstanceOf(ResourceAccessException.class, error.getCause());
         assertSame(cause, error.getCause().getCause());

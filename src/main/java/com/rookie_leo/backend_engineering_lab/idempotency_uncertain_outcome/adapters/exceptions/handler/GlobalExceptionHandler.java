@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
           new ApiErrorResponse(
                   HttpStatus.BAD_GATEWAY.value(),
-                  "Não foi possível processar o pagamento devido a uma falha na comunicação com o provedor.",
+                  "Não foi possível processar o pagamento devido a uma falha no provedor de pagamentos.",
                   Optional.empty()
           )
         );
