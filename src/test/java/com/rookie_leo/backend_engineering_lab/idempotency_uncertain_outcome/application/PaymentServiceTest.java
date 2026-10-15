@@ -25,7 +25,7 @@ class PaymentServiceTest {
 
         var result = service.processPayment(payment);
 
-        assertEquals(new PaymentDomain("ACC-0001", new BigDecimal("1500.00"), "BRL", outcome), result);
+        assertEquals(new PaymentDomain("ACC-0001", "KEY-123", new BigDecimal("1500.00"), "BRL", outcome), result);
         assertEquals(PaymentStatus.RECEIVED, payment.status());
         assertNotSame(payment, result);
         verify(provider).processPayment(payment);
@@ -47,6 +47,6 @@ class PaymentServiceTest {
     }
 
     private PaymentDomain receivedPayment() {
-        return new PaymentDomain("ACC-0001", new BigDecimal("1500.00"), "BRL", PaymentStatus.RECEIVED);
+        return new PaymentDomain("ACC-0001", "KEY-123", new BigDecimal("1500.00"), "BRL", PaymentStatus.RECEIVED);
     }
 }

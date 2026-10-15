@@ -63,7 +63,7 @@ class GlobalExceptionHandlerTest {
 
         mvc.perform(post("/payments/ACC-0001")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"amount\":1500.00,\"currency\":\"BRL\"}"))
+                        .content("{\"idempotencyId\":\"KEY-123\",\"amount\":1500.00,\"currency\":\"BRL\"}"))
                 .andExpect(status().is(code))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorCode").value(code))

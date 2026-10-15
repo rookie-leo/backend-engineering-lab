@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService implements PaymentUseCase {
 
-    private PaymentProviderPort provider;
+    private final PaymentProviderPort provider;
 
     @Autowired
     public PaymentService(PaymentProviderPort provider) {

@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PaymentProviderHttpClientTest {
 
     private final PaymentDomain payment = new PaymentDomain(
-            "ACC-0042", new BigDecimal("123.45"), "BRL", PaymentStatus.RECEIVED);
+            "ACC-0042", "KEY-123", new BigDecimal("123.45"), "BRL", PaymentStatus.RECEIVED);
 
     // The interceptor replaces transport only: RestClient still serializes requests,
     // handles HTTP status codes and deserializes responses. No sockets or sleeps.

@@ -28,6 +28,7 @@ public class PaymentController {
     ) {
         var domain = new PaymentDomain(
                 accountId,
+                request.idempotencyId(),
                 request.amount(),
                 request.currency(),
                 PaymentStatus.RECEIVED

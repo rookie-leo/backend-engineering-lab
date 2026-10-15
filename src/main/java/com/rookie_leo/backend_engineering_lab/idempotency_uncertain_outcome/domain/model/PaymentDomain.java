@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 public record PaymentDomain(
         String accountId,
+        String idempotencyId,
         BigDecimal amount,
         String currency,
         PaymentStatus status
@@ -13,7 +14,7 @@ public record PaymentDomain(
 
     public PaymentDomain withStatus(PaymentStatus newStatus) {
         return new PaymentDomain(
-                accountId, amount, currency, newStatus
+                accountId, idempotencyId, amount, currency, newStatus
         );
     }
 }

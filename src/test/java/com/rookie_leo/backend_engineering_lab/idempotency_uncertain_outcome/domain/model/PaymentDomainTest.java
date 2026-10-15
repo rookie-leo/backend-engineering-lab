@@ -13,11 +13,11 @@ class PaymentDomainTest {
     @ParameterizedTest
     @EnumSource(value = PaymentStatus.class, names = {"SUCCESS", "DECLINED"})
     void withStatusPreservesPaymentDataAndLeavesOriginalUnchanged(PaymentStatus status) {
-        var original = new PaymentDomain("ACC-0042", new BigDecimal("123.45"), "BRL", PaymentStatus.RECEIVED);
+        var original = new PaymentDomain("ACC-0042", "KEY-123", new BigDecimal("123.45"), "BRL", PaymentStatus.RECEIVED);
 
         var updated = original.withStatus(status);
 
-        assertEquals(new PaymentDomain("ACC-0042", new BigDecimal("123.45"), "BRL", status), updated);
+        assertEquals(new PaymentDomain("ACC-0042", "KEY-123", new BigDecimal("123.45"), "BRL", status), updated);
         assertEquals(PaymentStatus.RECEIVED, original.status());
         assertNotSame(original, updated);
     }

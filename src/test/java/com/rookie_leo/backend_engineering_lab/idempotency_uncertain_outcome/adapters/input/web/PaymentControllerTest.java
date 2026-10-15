@@ -23,8 +23,8 @@ class PaymentControllerTest {
     @ParameterizedTest
     @EnumSource(value = PaymentStatus.class, names = {"SUCCESS", "DECLINED"})
     void mapsInputAndReturnsBusinessOutcomeWithHttp200(PaymentStatus outcome) {
-        var request = new PaymentRequest(new BigDecimal("123.45"), "BRL");
-        var expectedPayment = new PaymentDomain("ACC-0042", request.amount(), request.currency(), PaymentStatus.RECEIVED);
+        var request = new PaymentRequest("KEY-123", new BigDecimal("123.45"), "BRL");
+        var expectedPayment = new PaymentDomain("ACC-0042", "KEY-123", request.amount(), request.currency(), PaymentStatus.RECEIVED);
         when(useCase.processPayment(expectedPayment)).thenReturn(expectedPayment.withStatus(outcome));
 
         var response = controller.payment("ACC-0042", request);
@@ -37,8 +37,8 @@ class PaymentControllerTest {
 
     @Test
     void propagatesUseCaseFailureInsteadOfReturningSuccess() {
-        var request = new PaymentRequest(new BigDecimal("1500.00"), "BRL");
-        var payment = new PaymentDomain("ACC-0004", request.amount(), request.currency(), PaymentStatus.RECEIVED);
+        var request = new PaymentRequest("KEY-123", new BigDecimal("1500.00"), "BRL");
+        var payment = new PaymentDomain("ACC-0004", "KEY-123", request.amount(), request.currency(), PaymentStatus.RECEIVED);
         var failure = new IllegalStateException("Provider unavailable");
         when(useCase.processPayment(payment)).thenThrow(failure);
 
